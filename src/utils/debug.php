@@ -1,10 +1,20 @@
 <?php
+
 declare(strict_types=1);
-namespace App;
-include_once('./src/utils/debug.php');
-// include
-// include_once
-// require
-// require_once
-dump('test');
-dump('==== dump ====');
+
+
+
+function dump($params)
+{
+    echo ('
+    <div style ="
+        display:inline-block;
+        background: lightgray;
+        border:1px solid gray;
+        padding:10px;
+    ">
+    <pre>
+    ');
+    print_r($params);
+    echo ('</pre></div><br>');
+}
