@@ -1,1 +1,4 @@
-<h3>Cos tam</h3>
+<b><?php
+echo $params['resultist'] ?? "";
+?></b>
+<h3>Lista notatek</h3>

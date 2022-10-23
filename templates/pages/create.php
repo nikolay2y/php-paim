@@ -1,4 +1,5 @@
-<h3>Nowa notatka</h3>
+<b><?php echo $params['resultCreate'] ?? "" ?></b>
+<h3>nowa notatka</h3>
 <div>
-    Tu bdzie formulaz notatki
+    Tu będzie formularz notatki
 </div>
