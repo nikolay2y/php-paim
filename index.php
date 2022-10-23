@@ -13,14 +13,16 @@ $action = $_GET['acion'] ?? DEFAULT_ACTION;
 $viewParams = [];
 
 if($action === 'create') {
+    $page = 'create';
     $viewParams['resultCreate'] = 'Udalo sie dodac notatke!';
 } else {
     $viewParams['resultList'] = 'Wyswietlamy liste nottek';
+$page='list';
 }
 
 
 
 $view = new View();
-$view->render($action, $viewParams);
+$view->render($page, $viewParams);
 
 ?>
