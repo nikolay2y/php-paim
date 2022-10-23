@@ -14,11 +14,19 @@ $viewParams = [];
 
 if($action === 'create') {
     $page = 'create';
-    $viewParams['resultCreate'] = 'Udalo sie dodac notatke!';
-} else {
-    $viewParams['resultList'] = 'Wyswietlamy liste nottek';
-$page='list';
-}
+    $created = false;
+    if(!emply($_POST)) {
+        $viewParams = [
+            'title' => $_POST['title'],
+            'description' => $_POST['description']
+        ];
+        $created = true;
+    }
+    $viewParams['created'] = $created;
+}else {
+        $page = 'list';
+    }
+
 
 
 
