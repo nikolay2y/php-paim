@@ -14,6 +14,7 @@ $viewParams = [];
 
 if($action === 'create') {
     $viewParams['resultCreate'] = 'Udalo sie dodac notatke!';
+} else {
     $viewParams['resultList'] = 'Wyswietlamy liste nottek';
 }
 
