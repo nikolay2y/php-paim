@@ -1,11 +1,13 @@
+<b><?php echo $params['resultCreate'] ?? "" ?></b>
 <h3>nowa notatka</h3>
 <div>
-    <?php if($params['created']) : ?>
-<div>
-<div>Tytul: <?php echo $params['title'] ?></div>
-<div>Opis: <?php echo $params['description'] ?></div>
-    </div>
+    <?php if ($params['created']) : ?>
+        <div>
+            <div>Tytuł: <?php echo $params['title'] ?></div>
+            <div>Opis: <?php echo $params['description'] ?> </div>
+        </div>
     <?php else : ?>
+
         <form action="/?action=create" class="note-form" method="post">
             <ul>
                 <li>
@@ -21,5 +23,5 @@
                 </li>
             </ul>
         </form>
-        <?php endif; ?>
+    <?php endif; ?>
 </div>

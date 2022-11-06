@@ -1,38 +1,28 @@
 <?php
-
-declare(strict_types=1);
-
 namespace App;
-
-require_once('./src/utils/View.php');
+require_once('./Exception/AppException.php');
+require_once('./Exception/StorageException.php');
+require_once('./Exception/ConfigurationException.php');
+require_once('./src/controller.php');
 include_once('./src/utils/debug.php');
-const DEFAULT_ACTION = 'list';
+require_once('./config/config.php');
+use App\Exception\AppException;
+use App\Exception\StorageException;
+use App\Exception\ConfigurationException;
+use Throwable;
 
-$action = $_GET['acion'] ?? DEFAULT_ACTION;
+$request = [
+    'get' => $_GET,
+    'post' => $_POST,
+];
 
-$viewParams = [];
-
-switch($action){
-case 'create':
-$page = 'create';
-    $created = false;
-    if(!empty($_POST)) {
-        $viewParams = [
-            'title' => $_POST['title'],
-            'description' => $_POST['description'],
-        ];
-        $created = true;
-    }
-    $viewParams['created'] = $created;
-    break;
-    default:
-    $page = 'list';
-    $viewParams['resultList'] = 'Wyswietlame listy notatek';
-    break;
-
+try {
+    Controller::initConfiguration($configuration);
+    $controller = new Controller($request);
+    $controller->run();
+} catch (AppException $e) {
+    echo "<h1>Wystąpił błąd w aplikacji</h1>";
+    echo '<h3>' . $e->getMessage() . '</h1>';
+} catch (Throwable $e) {
+    echo "<h1>Wystąpił błąd w aplikacji</h1>";
 }
-
-$view = new View();
-$view->render($page, $viewParams);
-
-?>

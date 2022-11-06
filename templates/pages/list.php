@@ -1,4 +1,4 @@
 <b><?php
-echo $params['resultist'] ?? "";
-?></b>
-<h3>Lista notatek</h3>
+    echo $params['resultList'] ?? "";
+    ?></b>
+<h3>lista notatek</h3>
