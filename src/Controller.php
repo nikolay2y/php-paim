@@ -11,6 +11,7 @@ class Controller
     private Database $database;
     private View $view;
     private array $request;
+
     public function __construct(array $request)
     {
         $this->request = $request;
@@ -28,25 +29,25 @@ class Controller
         $view = new View();
 
         $viewParams = [];
+
         switch ($this->action()) {
             case 'create':
                 $page = 'create';
-                $created = false;
                 $data = $this->getRequestPost();
                 if (!empty($data)) {
-                    $viewParams = [
+                    $noteData = [
                         'title' => $data['title'],
                         'description' => $data['description'],
                     ];
-                    $this->database->createNote($viewParams);
-                    header('Location: /');
-                }
-                $viewParams['created'] = $created;
+                    $this->database->createNote($noteData);
+                    header('Location: /?before=created');
+                  }
                 break;
             default:
                 $page = 'list';
-                $viewParams['resultList'] = 'Wyświetlamy listę notatek';
-                break;
+                $data=$this->getRequestGet();
+                $viewParams['before'] = $data['before'] ?? null;
+                 break;
         }
         $view->render($page, $viewParams);
     }
