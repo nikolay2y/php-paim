@@ -1,14 +1,15 @@
 <b><?php echo $params['resultCreate'] ?? "" ?></b>
-<h3>nowa notatka</h3>
+<h3>Nowa notatka</h3>
 <div>
-    <form action="?action=create" class="note-form" method="post">
+    <form action="/?action=create" class="note-form" method="post">
         <ul>
             <li>
-                <label for="title">Tytul <span class="required">*</span></label>
+                <label for="title">Tytuł <span class="required">*</span></label>
+                <input required type="text" name="title" id="title" class="filed-long">
             </li>
             <li>
-                <label for="field5">Tresc</label>
-                <textarea name="description" id="field5" class="field-long field-textarea"></textarea>
+                <label for="field5">Treść</label>
+                <textarea required name="description" id="field5" class="field-long field-textarea"></textarea>
             </li>
             <li>
                 <input type="submit" value="Submit">
