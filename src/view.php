@@ -6,7 +6,7 @@ namespace App;
 
 class View
 {
-    public function render(string $page, array $params = []): void
+    public function render(string $page, array $params=[]): void
     {
         $params['test'] = '<b>Test</b>';
         $params = $this->escape($params);
