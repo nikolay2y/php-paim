@@ -1,10 +1,13 @@
 <?php
+
 declare(strict_types=1);
-namespace App;
+
+namespace App\Controller;
+
+use App\Database;
 use App\Request;
-include_once('./src/view.php');
-require_once('./config/config.php');
-require_once('./src/database.php');
+use App\View;
+
 abstract class AbstractController
 {
     const DEFAULT_ACTION = 'list';
@@ -12,16 +15,19 @@ abstract class AbstractController
     protected Database $database;
     protected View $view;
     protected Request $request;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
         $this->view = new View();
         $this->database = new Database(self::$configuration);
     }
+
     public static function initConfiguration(array $configuration): void
     {
         self::$configuration = $configuration;
     }
+
     public function run(): void
     {
         $action = $this->action() . 'Action';
@@ -30,8 +36,25 @@ abstract class AbstractController
         }
         $this->$action();
     }
+
     protected function action(): string
     {
         return $this->request->getParam('action', self::DEFAULT_ACTION);
+    }
+
+    protected function redirect(string $to, array $params): void
+    {
+        $location = $to;
+        if (count($params)) {
+            $queryParams = [];
+            foreach ($params as $key => $value) {
+                $queryParams[] = urlencode($key) . '=' . urlencode($value);
+            }
+            $queryParams = implode('&', $queryParams);
+            $location .= '?' . $queryParams;
+        }
+
+        header("Location: $location");
+        exit;
     }
 }
