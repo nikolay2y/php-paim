@@ -22,7 +22,7 @@ class View
             if (is_array($param)) {
                 $clearParams[$key] = $this->escape($param);
             } else if ($param) {
-                $clearParams[$key] = htmlentities($param);
+                $clearParams[$key] = $param;
             } else {
                 $clearParams[$key] = $param;
             }
